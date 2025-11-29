@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.hackfed.org/v1/service/about.json",
+  "title": "Organization About Service",
+  "description": "Contact information and general details about an organization",
+  "type": "object",
+  "properties": {
+    "contact": {
+      "type": "object",
+      "description": "Contact information for the organization",
+      "properties": {
+        "website": {
+          "type": "string",
+          "format": "uri",
+          "description": "Organization's website URL"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Organization's contact email address"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

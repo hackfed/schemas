@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.hackfed.org/v1/service/telephony.json",
+  "title": "Organization Telephony Service",
+  "description": "Telephony configuration including exchanges, prefixes, and phonebook",
+  "type": "object",
+  "properties": {
+    "exchanges": {
+      "type": "array",
+      "description": "List of telephony exchanges",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the exchange"
+          },
+          "protocol": {
+            "type": "string",
+            "enum": [
+              "iax2"
+            ],
+            "description": "Telephony protocol used by the exchange"
+          },
+          "address": {
+            "type": "string",
+            "description": "Network address and port of the exchange (e.g., [IPv6]:port or IPv4:port)"
+          },
+          "codecs": {
+            "type": "array",
+            "description": "Supported audio codecs",
+            "items": {
+              "type": "string",
+              "enum": [
+                "opus",
+                "g722",
+                "ulaw"
+              ]
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "id",
+          "protocol",
+          "address",
+          "codecs"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "prefixes": {
+      "type": "array",
+      "description": "Telephony number prefixes allocated to the organization",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the prefix"
+          },
+          "prefix": {
+            "type": "string",
+            "pattern": "^[0-9]+$",
+            "description": "Numeric prefix for phone numbers"
+          },
+          "description": {
+            "type": "string",
+            "description": "Human-readable description of the prefix"
+          },
+          "exchange": {
+            "type": "string",
+            "description": "Reference to the exchange ID handling this prefix"
+          }
+        },
+        "required": [
+          "id",
+          "prefix",
+          "exchange"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "phonebook": {
+      "type": "array",
+      "description": "Public phonebook URLs",
+      "items": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL to the phonebook resource"
+          },
+          "format": {
+            "type": "string",
+            "enum": [
+              "hackfed"
+            ],
+            "description": "Format of the phonebook data"
+          }
+        },
+        "required": [
+          "url",
+          "format"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.hackfed.org/v1/service/nebula.json",
+  "title": "Organization Nebula Service",
+  "description": "Nebula VPN network configuration for the organization",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "address": {
+        "$ref": "https://schemas.hackfed.org/v1/base/inet6num.json",
+        "description": "IPv6 address of the Nebula node"
+      },
+      "lighthouse": {
+        "type": "object",
+        "description": "Lighthouse configuration for the node",
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether this node acts as a lighthouse"
+          },
+          "endpoints": {
+            "type": "array",
+            "description": "Public endpoints for lighthouse connectivity",
+            "items": {
+              "type": "string",
+              "description": "Endpoint in format host:port"
+            },
+            "minItems": 1
+          }
+        },
+        "required": [
+          "enabled"
+        ],
+        "additionalProperties": false
+      },
+      "certificates": {
+        "type": "array",
+        "description": "List of certificate fingerprints for the node",
+        "items": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "SHA-256 certificate fingerprint in hexadecimal"
+        },
+        "minItems": 1
+      }
+    },
+    "required": [
+      "address"
+    ],
+    "additionalProperties": false
+  }
+}

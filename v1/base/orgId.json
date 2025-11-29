@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.hackfed.org/v1/base/orgId.json",
+  "title": "Organization ID",
+  "description": "A unique identifier for an organization in the Hackfed registry",
+  "type": "string",
+  "pattern": "^[a-z0-9]*$",
+  "minLength": 4,
+  "maxLength": 16,
+  "examples": [
+    "bksp",
+    "xkem"
+  ]
+}

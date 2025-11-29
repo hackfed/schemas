@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.hackfed.org/v1/base/inet6num.json",
+  "title": "IPv6 Address",
+  "description": "An IPv6 address in standard notation",
+  "type": "string",
+  "pattern": "^(((?:[0-9A-Fa-f]{1,4}))*((?::[0-9A-Fa-f]{1,4}))*::((?:[0-9A-Fa-f]{1,4}))*((?::[0-9A-Fa-f]{1,4}))*|((?:[0-9A-Fa-f]{1,4}))((?::[0-9A-Fa-f]{1,4})){7})(\/([1-9]|[1-9][0-9]|1[0-1][0-9]|12[0-8])){0,1}$",
+  "examples": [
+    "fd79:7636:1f08:883d::008",
+    "2001:db8::1",
+    "::1",
+    "fe80::1/128"
+  ]
+}
