@@ -15,14 +15,13 @@
             "type": "string",
             "enum": [
               "github",
-              "gitlab",
               "email"
             ],
             "description": "Type of maintainer identifier"
           },
           "username": {
             "type": "string",
-            "description": "Username for github/gitlab type maintainers"
+            "description": "Username for GitHub type maintainers"
           },
           "email": {
             "type": "string",
@@ -39,8 +38,7 @@
               "properties": {
                 "type": {
                   "enum": [
-                    "github",
-                    "gitlab"
+                    "github"
                   ]
                 }
               }

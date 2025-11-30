@@ -1,18 +1,38 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://schemas.hackfed.org/v1/entity/organization.json",
-  "$ref": "https://schemas.hackfed.org/v1/base/object.json",
   "title": "Hackfed Organization",
   "description": "Complete organization entity definition for Hackfed registry",
   "type": "object",
+  "required": [
+    "apiVersion",
+    "kind",
+    "metadata",
+    "spec"
+  ],
   "properties": {
     "apiVersion": {
       "type": "string",
+      "description": "API version identifier",
       "const": "hackfed/v1"
     },
     "kind": {
       "type": "string",
+      "description": "Resource type",
       "const": "Organization"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Metadata about the organization",
+      "properties": {
+        "orgId": {
+          "$ref": "https://schemas.hackfed.org/v1/base/orgId.json",
+          "description": "Identifier of the organization owning this resource"
+        }
+      },
+      "required": [
+        "orgId"
+      ]
     },
     "spec": {
       "type": "object",
