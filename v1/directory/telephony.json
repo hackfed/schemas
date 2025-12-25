@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.hackfed.org/v1/directory/telephony.json",
+  "title": "Hackfed Telephony Directory",
+  "description": "Aggregated telephony service information for Hackfed network members.",
+  "type": "object",
+  "required": [
+    "orgs"
+  ],
+  "properties": {
+    "orgs": {
+      "type": "array",
+      "description": "List of organizations participating in Hackfed Telephony Network.",
+      "items": {
+        "type": "object",
+        "required": [
+          "orgId",
+          "name",
+          "exchanges"
+        ],
+        "properties": {
+          "orgId": {
+            "type": "string",
+            "description": "Unique identifier for the organization."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the organization."
+          },
+          "exchanges": {
+            "type": "array",
+            "description": "List of telephony exchanges for the organization.",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "protocol",
+                "endpoint",
+                "codecs",
+                "prefixes"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Unique exchange identifier within the organization."
+                },
+                "protocol": {
+                  "type": "string",
+                  "enum": [
+                    "iax2"
+                  ],
+                  "description": "Telephony protocol used by the exchange."
+                },
+                "endpoint": {
+                  "type": "string",
+                  "description": "Network address and port of the exchange (e.g., [IPv6]:port or IPv4:port)."
+                },
+                "codecs": {
+                  "type": "array",
+                  "description": "Supported audio codecs.",
+                  "items": {
+                    "type": "string",
+                    "enum": [
+                      "opus",
+                      "g722",
+                      "ulaw"
+                    ]
+                  },
+                  "minItems": 1
+                },
+                "prefixes": {
+                  "type": "array",
+                  "description": "Telephony number prefixes allocated to the organization for this exchange.",
+                  "items": {
+                    "type": "string",
+                    "description": "Telephony number prefix (e.g., country or area code)."
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
