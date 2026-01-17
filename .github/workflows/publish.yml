@@ -1,8 +1,7 @@
 name: Publish JSON Schemas
 on:
-  push:
-    branches:
-      - main
+  release:
+    types: [published]
 
 jobs:
   build:
@@ -10,6 +9,7 @@ jobs:
     name: Publish
     permissions:
       contents: read
+      id-token: write
     steps:
       - name: Set-up s5cmd
         uses: peak/action-setup-s5cmd@main
