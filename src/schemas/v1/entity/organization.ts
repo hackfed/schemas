@@ -1,20 +1,14 @@
 import { z } from 'zod'
 
 import { OrganizationIdSchema } from '../base/organization-id'
+import { ResourceDefinitionSchema } from '../base/resource-definition'
 import { AboutServiceSchema } from '../service/about'
 import { AccessServiceSchema } from '../service/access'
 import { NebulaServiceSchema } from '../service/nebula'
 import { TelephonyServiceSchema } from '../service/telephony'
 
-export const OrganizationSchema = z
-  .object({
-    apiVersion: z.literal('hackfed/v1').describe('API version identifier'),
-    kind: z.literal('Organization').describe('Resource type'),
-    metadata: z
-      .object({
-        orgId: OrganizationIdSchema.describe('Identifier of the organization owning this resource'),
-      })
-      .describe('Metadata about the organization'),
+export const OrganizationSchema = ResourceDefinitionSchema
+  .extend({
     spec: z
       .object({
         id: OrganizationIdSchema.describe('Organization ID (must match metadata.orgId)'),

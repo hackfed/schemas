@@ -1,6 +1,6 @@
 import { kebabCase } from 'change-case'
 import { glob } from 'glob'
-import { mkdir, stat, unlink, writeFile } from 'node:fs/promises'
+import { mkdir, rm, stat, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 import { z } from 'zod'
 
@@ -31,7 +31,10 @@ for await (const version of VERSIONS) {
   // Cleanup target directory
   const targetDirectory = path.resolve(TARGET_DIR, version)
   const isDirectoryExists = await stat(targetDirectory).then(() => true).catch(() => false)
-  await (isDirectoryExists ? unlink(path.resolve(targetDirectory, '*.json')) : mkdir(targetDirectory, { recursive: true }))
+  if (isDirectoryExists) {
+    await rm(targetDirectory, { force: true, recursive: true })
+  }
+  await mkdir(targetDirectory, { recursive: true })
 
   // Generate schemas
   for await (const [id, schema] of schemas) {
