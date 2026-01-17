@@ -11,6 +11,9 @@
     "LICENSE",
     "README"
   ],
+  "scripts": {
+    "generate": "tsx src/cmd/generate-json-schemas.ts"
+  },
   "packageManager": "pnpm@10.28.0",
   "devDependencies": {
     "@bksp/style-guide": "^1.2.6",

@@ -33,11 +33,13 @@ for await (const version of VERSIONS) {
   const isDirectoryExists = await stat(targetDirectory).then(() => true).catch(() => false)
   await (isDirectoryExists ? unlink(path.resolve(targetDirectory, '*.json')) : mkdir(targetDirectory, { recursive: true }))
 
+  // Generate schemas
   for await (const [id, schema] of schemas) {
     const jsonSchema = schema.toJSONSchema({
+      // @ts-expect-error ts(2353) -- something is wrong with Zod's type inference.
       external: {
         registry,
-        uri: (referenceId: string) => `https://schemas.hackfed.org/v1/${kebabCase(referenceId)}.json`
+        uri: (referenceId: string) => `https://schemas.hackfed.org/${version}/${kebabCase(referenceId)}.json`
       },
       target: 'draft-2020-12'
     })
