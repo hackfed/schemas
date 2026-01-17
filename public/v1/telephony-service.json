@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.hackfed.org/v1/telephony-service.json",
+  "type": "object",
+  "properties": {
+    "exchanges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "address": {
+            "type": "string",
+            "description": "Network address and port of the exchange (e.g., [IPv6]:port or IPv4:port)"
+          },
+          "codecs": {
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "opus",
+                "g722",
+                "ulaw"
+              ]
+            },
+            "description": "Supported audio codecs"
+          },
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the exchange"
+          },
+          "protocol": {
+            "type": "string",
+            "enum": [
+              "iax2"
+            ],
+            "description": "Telephony protocol used by the exchange"
+          }
+        },
+        "required": [
+          "address",
+          "codecs",
+          "id",
+          "protocol"
+        ],
+        "additionalProperties": false
+      },
+      "description": "List of telephony exchanges"
+    },
+    "phonebook": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "format": {
+            "type": "string",
+            "enum": [
+              "hackfed"
+            ],
+            "description": "Format of the phonebook data"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "URL to the phonebook resource"
+          }
+        },
+        "required": [
+          "format",
+          "url"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Public phonebook URLs"
+    },
+    "prefixes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "description": {
+            "type": "string",
+            "description": "Human-readable description of the prefix"
+          },
+          "exchange": {
+            "type": "string",
+            "description": "Reference to the exchange ID handling this prefix"
+          },
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the prefix"
+          },
+          "prefix": {
+            "type": "string",
+            "format": "e164",
+            "pattern": "^\\+[1-9]\\d{6,14}$",
+            "description": "Numeric prefix for phone numbers"
+          }
+        },
+        "required": [
+          "exchange",
+          "id",
+          "prefix"
+        ],
+        "additionalProperties": false
+      },
+      "description": "Telephony number prefixes allocated to the organization"
+    }
+  },
+  "additionalProperties": false,
+  "description": "Telephony configuration including exchanges, prefixes, and phonebook",
+  "id": "TelephonyService",
+  "title": "Organization Telephony Service"
+}

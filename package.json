@@ -1,0 +1,29 @@
+{
+  "name": "@hackfed/schemas",
+  "version": "0.0.0",
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    "./*": "./src/schemas/*"
+  },
+  "files": [
+    "src/schemas",
+    "LICENSE",
+    "README"
+  ],
+  "packageManager": "pnpm@10.28.0",
+  "devDependencies": {
+    "@bksp/style-guide": "^1.2.6",
+    "@tsconfig/strictest": "^2.0.8",
+    "@types/node": "^25.0.9",
+    "change-case": "^5.4.4",
+    "eslint": "^9.39.2",
+    "glob": "^13.0.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3",
+    "zod": "4"
+  },
+  "peerDependencies": {
+    "zod": "4"
+  }
+}

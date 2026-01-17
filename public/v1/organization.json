@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.hackfed.org/v1/organization.json",
+  "type": "object",
+  "properties": {
+    "apiVersion": {
+      "type": "string",
+      "const": "hackfed/v1",
+      "description": "API version identifier"
+    },
+    "kind": {
+      "type": "string",
+      "const": "Organization",
+      "description": "Resource type"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "orgId": {
+          "description": "Identifier of the organization owning this resource",
+          "$ref": "https://schemas.hackfed.org/v1/organization-id.json"
+        }
+      },
+      "required": [
+        "orgId"
+      ],
+      "additionalProperties": false,
+      "description": "Metadata about the organization"
+    },
+    "spec": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Organization ID (must match metadata.orgId)",
+          "$ref": "https://schemas.hackfed.org/v1/organization-id.json"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 4,
+          "maxLength": 64,
+          "description": "Human-readable organization name"
+        },
+        "services": {
+          "type": "object",
+          "properties": {
+            "about": {
+              "$ref": "https://schemas.hackfed.org/v1/about-service.json"
+            },
+            "access": {
+              "$ref": "https://schemas.hackfed.org/v1/access-service.json"
+            },
+            "nebula": {
+              "$ref": "https://schemas.hackfed.org/v1/nebula-service.json"
+            },
+            "telephony": {
+              "$ref": "https://schemas.hackfed.org/v1/telephony-service.json"
+            }
+          },
+          "additionalProperties": false,
+          "description": "Services provided by the organization"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "additionalProperties": false,
+      "description": "Organization specification"
+    }
+  },
+  "required": [
+    "apiVersion",
+    "kind",
+    "metadata",
+    "spec"
+  ],
+  "additionalProperties": false,
+  "description": "Complete organization entity definition for Hackfed registry",
+  "id": "Organization",
+  "title": "Hackfed Organization"
+}
