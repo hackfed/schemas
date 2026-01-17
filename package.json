@@ -3,6 +3,10 @@
   "version": "0.0.4",
   "license": "MIT",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hackfed/schemas.git"
+  },
   "exports": {
     "./*": "./src/schemas/*"
   },
