@@ -32,7 +32,8 @@ jobs:
         run: pnpm install
 
       - name: Publish packages
-        run: pnpm publish --provenance
+        # Git checks were disabled to allow publishing from a detached HEAD state on releases
+        run: pnpm publish --provenance --no-git-checks
 
       - name: Generate JSON Schemas
         run: pnpm generate
