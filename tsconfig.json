@@ -11,9 +11,16 @@
     "resolveJsonModule": true,
     "allowJs": true,
     "verbatimModuleSyntax": true,
+    "declaration": true,
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "outDir": "dist",
   },
-  "include": ["src/**/*.ts", "src/**/*.json"]
+  "include": [
+    "src/**/*.ts",
+  ],
+  "exclude": [
+    "src/cmd/**/*.ts"
+  ]
 }

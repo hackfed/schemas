@@ -1,1 +1,5 @@
-/* eslint-disable-next-line unicorn/no-empty-file -- this is a stub file. */
+/**
+ * @fileoverview Stub file to make TypeScript recognize this as a module.
+ */
+
+/* eslint-disable-next-line unicorn/no-empty-file -- stub */

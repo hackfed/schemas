@@ -34,7 +34,7 @@ jobs:
 
       - name: Publish npm package
         # Git checks were disabled to allow publishing from a detached HEAD state on releases
-        run: pnpm publish --provenance --no-git-checks
+        run: pnpm build && pnpm publish --provenance --no-git-checks
 
       - name: Generate schemas
         run: pnpm generate
