@@ -7,6 +7,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     name: Publish
+    environment: Production
     permissions:
       contents: read
       id-token: write
@@ -31,11 +32,11 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
-      - name: Publish packages
+      - name: Publish npm package
         # Git checks were disabled to allow publishing from a detached HEAD state on releases
         run: pnpm publish --provenance --no-git-checks
 
-      - name: Generate JSON Schemas
+      - name: Generate schemas
         run: pnpm generate
 
       - name: Upload schemas
