@@ -7,7 +7,11 @@ export const TelephonyDirectoryPhonebookSchema = z
     format: z.enum(['hackfed']).describe('Format of the phonebook data'),
     url: z.url().describe('URL to the phonebook resource'),
   })
-  .strict()
+  .meta({
+    description: 'Information about a public phonebook for an organization.',
+    id: 'TelephonyDirectoryPhonebook',
+    title: 'Hackfed Telephony Directory Phonebook',
+  })
 
 export const TelephonyDirectoryExchangeSchema = z
   .object({
@@ -24,7 +28,11 @@ export const TelephonyDirectoryExchangeSchema = z
       .describe('Telephony number prefixes allocated to the organization for this exchange'),
     protocol: z.enum(['iax2']).describe('Telephony protocol used by the exchange'),
   })
-  .strict()
+  .meta({
+    description: 'Information about a telephony exchange for an organization.',
+    id: 'TelephonyDirectoryExchange',
+    title: 'Hackfed Telephony Directory Exchange',
+  })
 
 export const TelephonyDirectoryOrgSchema = z
   .object({
@@ -35,7 +43,11 @@ export const TelephonyDirectoryOrgSchema = z
     orgId: OrganizationIdSchema.describe('Unique identifier for the organization'),
     phonebooks: TelephonyDirectoryPhonebookSchema.array().describe('Public phonebook URLs for the organization'),
   })
-  .strict()
+  .meta({
+    description: 'Information about an organization participating in Hackfed Telephony Network.',
+    id: 'TelephonyDirectoryOrg',
+    title: 'Hackfed Telephony Directory Organization',
+  })
 
 export const TelephonyDirectorySchema = z
   .object({
