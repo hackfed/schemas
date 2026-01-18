@@ -1,9 +1,15 @@
 import { z } from 'zod'
 
 import { OrganizationIdSchema } from '../base/organization-id'
-import { PhonebookSchema } from '../service/telephony'
 
-export const DirectoryExchangeSchema = z
+export const TelephonyDirectoryPhonebookSchema = z
+  .object({
+    format: z.enum(['hackfed']).describe('Format of the phonebook data'),
+    url: z.url().describe('URL to the phonebook resource'),
+  })
+  .strict()
+
+export const TelephonyDirectoryExchangeSchema = z
   .object({
     codecs: z
       .array(z.enum(['opus', 'g722', 'ulaw']))
@@ -20,21 +26,21 @@ export const DirectoryExchangeSchema = z
   })
   .strict()
 
-export const DirectoryOrgSchema = z
+export const TelephonyDirectoryOrgSchema = z
   .object({
-    exchanges: DirectoryExchangeSchema
+    exchanges: TelephonyDirectoryExchangeSchema
       .array()
       .describe('List of telephony exchanges for the organization'),
     name: z.string().describe('Name of the organization'),
     orgId: OrganizationIdSchema.describe('Unique identifier for the organization'),
-    phonebooks: PhonebookSchema.array().describe('Public phonebook URLs for the organization'),
+    phonebooks: TelephonyDirectoryPhonebookSchema.array().describe('Public phonebook URLs for the organization'),
   })
   .strict()
 
 export const TelephonyDirectorySchema = z
   .object({
     orgs: z
-      .array(DirectoryOrgSchema)
+      .array(TelephonyDirectoryOrgSchema)
       .describe('List of organizations participating in Hackfed Telephony Network.'),
   })
   .meta({
@@ -44,7 +50,13 @@ export const TelephonyDirectorySchema = z
   })
 
 export type TelephonyDirectory = z.infer<typeof TelephonyDirectorySchema>
-export type DirectoryOrg = z.infer<typeof DirectoryOrgSchema>
-export type DirectoryExchange = z.infer<typeof DirectoryExchangeSchema>
+export type TelephonyDirectoryOrg = z.infer<typeof TelephonyDirectoryOrgSchema>
+export type TelephonyDirectoryExchange = z.infer<typeof TelephonyDirectoryExchangeSchema>
+export type TelephonyDirectoryPhonebook = z.infer<typeof TelephonyDirectoryPhonebookSchema>
 
-export const __schemas = [TelephonyDirectorySchema]
+export const __schemas = [
+  TelephonyDirectorySchema,
+  TelephonyDirectoryOrgSchema,
+  TelephonyDirectoryExchangeSchema,
+  TelephonyDirectoryPhonebookSchema
+]
