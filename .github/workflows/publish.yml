@@ -13,7 +13,7 @@ jobs:
       id-token: write
     steps:
       - name: Set-up s5cmd
-        uses: peak/action-setup-s5cmd@main
+        uses: peak/action-setup-s5cmd@bde462e7399c68b4a9b05549d90b0e7d5c95e60f
         with:
           version: v2.3.0
 
@@ -21,7 +21,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
 
       - name: Install Node.js
         uses: actions/setup-node@v6
