@@ -37,5 +37,3 @@ export const OrganizationSchema = ResourceDefinitionSchema
   })
 
 export type Organization = z.infer<typeof OrganizationSchema>
-
-export const __schemas = [OrganizationSchema]

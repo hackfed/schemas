@@ -13,5 +13,3 @@ export const Inet6NumberSchema = z
   })
 
 export type Inet6Number = z.infer<typeof Inet6NumberSchema>
-
-export const __schemas = [Inet6NumberSchema]

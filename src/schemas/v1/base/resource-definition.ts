@@ -21,5 +21,3 @@ export const ResourceDefinitionSchema = z
   })
 
 export type ResourceDefinition = z.infer<typeof ResourceDefinitionSchema>
-
-export const __schemas = [ResourceDefinitionSchema]

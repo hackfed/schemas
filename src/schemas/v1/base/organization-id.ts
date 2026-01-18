@@ -13,5 +13,3 @@ export const OrganizationIdSchema = z
   })
 
 export type OrganizationId = z.infer<typeof OrganizationIdSchema>
-
-export const __schemas = [OrganizationIdSchema]

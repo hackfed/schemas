@@ -2,7 +2,7 @@ import { kebabCase } from 'change-case'
 import { glob } from 'glob'
 import { mkdir, rm, stat, writeFile } from 'node:fs/promises'
 import path from 'node:path'
-import { z } from 'zod'
+import { Schema, z } from 'zod'
 
 const VERSIONS = ['v1']
 const TARGET_DIR = path.resolve(import.meta.dirname, '../../public/')
@@ -16,11 +16,14 @@ for await (const version of VERSIONS) {
   for await (const schemaPath of schemasPaths) {
     const schemaModule = await import(schemaPath)
 
-    const exportedSchemas = (schemaModule.__schemas ?? []) as z.ZodSchema[]
-    for (const schema of exportedSchemas) {
+    for (const schema of Object.values(schemaModule)) {
+      // Skip everything but Zod schemas
+      if (!(schema instanceof z.ZodType)) continue
+
+      // Skip schemas without ID in metadata – these are internal helper schemas
       const meta = schema.meta()
-      if (!meta || !meta.id) {
-        throw new Error(`Schema in ${schemaPath} is missing an 'id' in its metadata.`)
+      if (!meta?.id) {
+        continue
       }
 
       registry.add(schema, { id: meta.id })

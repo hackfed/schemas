@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const ExchangeSchema = z
+export const TelephonyServiceExchangeSchema = z
   .object({
     address: z
       .string()
@@ -14,7 +14,7 @@ export const ExchangeSchema = z
   })
   .strict()
 
-export const PrefixSchema = z
+export const TelephonyServicePrefixSchema = z
   .object({
     description: z.string().describe('Human-readable description of the prefix').optional(),
     exchange: z.string().describe('Reference to the exchange ID handling this prefix'),
@@ -23,7 +23,7 @@ export const PrefixSchema = z
   })
   .strict()
 
-export const PhonebookSchema = z
+export const TelephonyServicePhonebookSchema = z
   .object({
     format: z.enum(['hackfed']).describe('Format of the phonebook data'),
     url: z.url().describe('URL to the phonebook resource'),
@@ -32,10 +32,10 @@ export const PhonebookSchema = z
 
 export const TelephonyServiceSchema = z
   .object({
-    exchanges: z.array(ExchangeSchema).describe('List of telephony exchanges').optional(),
-    phonebook: z.array(PhonebookSchema).describe('Public phonebook URLs').optional(),
+    exchanges: z.array(TelephonyServiceExchangeSchema).describe('List of telephony exchanges').optional(),
+    phonebook: z.array(TelephonyServicePhonebookSchema).describe('Public phonebook URLs').optional(),
     prefixes: z
-      .array(PrefixSchema)
+      .array(TelephonyServicePrefixSchema)
       .describe('Telephony number prefixes allocated to the organization')
       .optional(),
   })
@@ -47,8 +47,6 @@ export const TelephonyServiceSchema = z
   })
 
 export type TelephonyService = z.infer<typeof TelephonyServiceSchema>
-export type Exchange = z.infer<typeof ExchangeSchema>
-export type Prefix = z.infer<typeof PrefixSchema>
-export type Phonebook = z.infer<typeof PhonebookSchema>
-
-export const __schemas = [TelephonyServiceSchema]
+export type TelephonyServiceExchange = z.infer<typeof TelephonyServiceExchangeSchema>
+export type TelephonyServicePrefix = z.infer<typeof TelephonyServicePrefixSchema>
+export type TelephonyServicePhonebook = z.infer<typeof TelephonyServicePhonebookSchema>

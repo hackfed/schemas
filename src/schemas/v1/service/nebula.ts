@@ -2,7 +2,7 @@ import { z } from 'zod'
 
 import { Inet6NumberSchema } from '../base/inet6-number'
 
-export const NebulaNodeSchema = z
+export const NebulaServiceNodeSchema = z
   .object({
     address: Inet6NumberSchema.describe('IPv6 address of the Nebula node'),
     certificates: z
@@ -29,13 +29,11 @@ export const NebulaNodeSchema = z
   })
   .strict()
 
-export const NebulaServiceSchema = z.array(NebulaNodeSchema).meta({
+export const NebulaServiceSchema = z.array(NebulaServiceNodeSchema).meta({
   description: 'Nebula VPN network configuration for the organization',
   id: 'NebulaService',
   title: 'Organization Nebula Service',
 })
 
 export type NebulaService = z.infer<typeof NebulaServiceSchema>
-export type NebulaNode = z.infer<typeof NebulaNodeSchema>
-
-export const __schemas = [NebulaServiceSchema]
+export type NebulaServiceNode = z.infer<typeof NebulaServiceNodeSchema>

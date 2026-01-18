@@ -19,5 +19,3 @@ export const AboutServiceSchema = z
   })
 
 export type AboutService = z.infer<typeof AboutServiceSchema>
-
-export const __schemas = [AboutServiceSchema]
