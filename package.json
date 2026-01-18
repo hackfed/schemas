@@ -1,5 +1,6 @@
 {
   "name": "@hackfed/schemas",
+  "description": "Resource Definition Schemas for Hackfed",
   "version": "0.7.0",
   "license": "MIT",
   "type": "module",
