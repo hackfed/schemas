@@ -32,12 +32,12 @@ jobs:
       - name: Install dependencies
         run: pnpm install
 
+      - name: Generate schemas
+        run: pnpm generate
+
       - name: Publish npm package
         # Git checks were disabled to allow publishing from a detached HEAD state on releases
         run: pnpm build && pnpm publish --provenance --no-git-checks
-
-      - name: Generate schemas
-        run: pnpm generate
 
       - name: Upload schemas
         env:
