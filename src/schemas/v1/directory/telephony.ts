@@ -1,6 +1,7 @@
 import { z } from 'zod'
 
 import { OrganizationIdSchema } from '../base/organization-id'
+import { PhonebookSchema } from '../service/telephony'
 
 export const DirectoryExchangeSchema = z
   .object({
@@ -21,11 +22,12 @@ export const DirectoryExchangeSchema = z
 
 export const DirectoryOrgSchema = z
   .object({
-    exchanges: z
-      .array(DirectoryExchangeSchema)
+    exchanges: DirectoryExchangeSchema
+      .array()
       .describe('List of telephony exchanges for the organization'),
     name: z.string().describe('Name of the organization'),
     orgId: OrganizationIdSchema.describe('Unique identifier for the organization'),
+    phonebooks: PhonebookSchema.array().describe('Public phonebook URLs for the organization'),
   })
   .strict()
 
