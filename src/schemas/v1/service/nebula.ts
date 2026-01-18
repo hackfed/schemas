@@ -13,8 +13,7 @@ export const NebulaNodeSchema = z
           .describe('SHA-256 certificate fingerprint in hexadecimal')
       )
       .min(1)
-      .describe('List of certificate fingerprints for the node')
-      .optional(),
+      .describe('List of certificate fingerprints for the node'),
     lighthouse: z
       .object({
         enabled: z.boolean().describe('Whether this node acts as a lighthouse'),
