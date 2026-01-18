@@ -2,7 +2,7 @@ import { kebabCase } from 'change-case'
 import { glob } from 'glob'
 import { mkdir, rm, stat, writeFile } from 'node:fs/promises'
 import path from 'node:path'
-import { Schema, z } from 'zod'
+import { z } from 'zod'
 
 const VERSIONS = ['v1']
 const TARGET_DIR = path.resolve(import.meta.dirname, '../../public/')
