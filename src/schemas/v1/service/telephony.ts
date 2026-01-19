@@ -10,16 +10,8 @@ export const TelephonyServiceExchangeSchema = z
       .min(1)
       .describe('Supported audio codecs'),
     id: z.string().describe('Unique identifier for the exchange'),
-    protocol: z.enum(['iax2']).describe('Telephony protocol used by the exchange'),
-  })
-  .strict()
-
-export const TelephonyServicePrefixSchema = z
-  .object({
-    description: z.string().describe('Human-readable description of the prefix').optional(),
-    exchange: z.string().describe('Reference to the exchange ID handling this prefix'),
-    id: z.string().describe('Unique identifier for the prefix'),
-    prefix: z.e164().describe('Numeric prefix for phone numbers'),
+    prefix: z.e164().describe('Numeric prefix used to route calls to this exchange'),
+    protocol: z.enum(['iax2']).describe('Telephony protocol used by the exchange')
   })
   .strict()
 
@@ -33,11 +25,7 @@ export const TelephonyServicePhonebookSchema = z
 export const TelephonyServiceSchema = z
   .object({
     exchanges: z.array(TelephonyServiceExchangeSchema).describe('List of telephony exchanges').optional(),
-    phonebook: z.array(TelephonyServicePhonebookSchema).describe('Public phonebook URLs').optional(),
-    prefixes: z
-      .array(TelephonyServicePrefixSchema)
-      .describe('Telephony number prefixes allocated to the organization')
-      .optional(),
+    phonebook: TelephonyServicePhonebookSchema.describe('Phonebook').optional(),
   })
   .strict()
   .meta({
@@ -48,5 +36,4 @@ export const TelephonyServiceSchema = z
 
 export type TelephonyService = z.infer<typeof TelephonyServiceSchema>
 export type TelephonyServiceExchange = z.infer<typeof TelephonyServiceExchangeSchema>
-export type TelephonyServicePrefix = z.infer<typeof TelephonyServicePrefixSchema>
 export type TelephonyServicePhonebook = z.infer<typeof TelephonyServicePhonebookSchema>

@@ -23,9 +23,7 @@ export const TelephonyDirectoryExchangeSchema = z
       .string()
       .describe('Network address and port of the exchange (e.g., [IPv6]:port or IPv4:port)'),
     id: z.string().describe('Unique exchange identifier within the organization'),
-    prefixes: z
-      .array(z.e164().describe('Telephony number prefix (e.g., country or area code)'))
-      .describe('Telephony number prefixes allocated to the organization for this exchange'),
+    prefix: z.e164().describe('Telephony number prefix allocated to this exchange'),
     protocol: z.enum(['iax2']).describe('Telephony protocol used by the exchange'),
   })
   .meta({
@@ -41,7 +39,7 @@ export const TelephonyDirectoryOrgSchema = z
       .describe('List of telephony exchanges for the organization'),
     name: z.string().describe('Name of the organization'),
     orgId: OrganizationIdSchema.describe('Unique identifier for the organization'),
-    phonebooks: TelephonyDirectoryPhonebookSchema.array().describe('Public phonebook URLs for the organization'),
+    phonebook: TelephonyDirectoryPhonebookSchema.optional().describe('Public phonebook for the organization'),
   })
   .meta({
     description: 'Information about an organization participating in Hackfed Telephony Network.',
