@@ -17,7 +17,7 @@
   "files": [
     "dist",
     "LICENSE",
-    "README"
+    "README.md"
   ],
   "scripts": {
     "generate": "tsx src/cmd/generate-json-schemas.ts",
