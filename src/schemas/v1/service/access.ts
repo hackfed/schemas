@@ -35,6 +35,6 @@ export const AccessServiceSchema = z
   })
 
 export type AccessService = z.infer<typeof AccessServiceSchema>
-export type AccessServiceMaintainer = z.infer<typeof AccessServiceMaintainerSchema>
-export type AccessServiceGitHubMaintainer = z.infer<typeof AccessServiceGitHubMaintainerSchema>
 export type AccessServiceEmailMaintainer = z.infer<typeof AccessServiceEmailMaintainerSchema>
+export type AccessServiceGitHubMaintainer = z.infer<typeof AccessServiceGitHubMaintainerSchema>
+export type AccessServiceMaintainer = z.infer<typeof AccessServiceMaintainerSchema>

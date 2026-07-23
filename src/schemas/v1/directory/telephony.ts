@@ -60,6 +60,6 @@ export const TelephonyDirectorySchema = z
   })
 
 export type TelephonyDirectory = z.infer<typeof TelephonyDirectorySchema>
-export type TelephonyDirectoryOrg = z.infer<typeof TelephonyDirectoryOrgSchema>
 export type TelephonyDirectoryExchange = z.infer<typeof TelephonyDirectoryExchangeSchema>
+export type TelephonyDirectoryOrg = z.infer<typeof TelephonyDirectoryOrgSchema>
 export type TelephonyDirectoryPhonebook = z.infer<typeof TelephonyDirectoryPhonebookSchema>

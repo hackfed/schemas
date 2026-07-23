@@ -8,39 +8,48 @@ const VERSIONS = ['v1']
 const TARGET_DIR = path.resolve(import.meta.dirname, '../../public/')
 
 const registry = z.registry()
-const schemas = new Map<string, z.ZodSchema>()
+const schemas = new Map<string, z.ZodType>()
 
-for await (const version of VERSIONS) {
+function registerSchema (schema: unknown, targetRegistry: typeof registry, schemas: Map<string, z.ZodType>): void {
+  // Skip everything but Zod schemas
+  if (!(schema instanceof z.ZodType)) return
+
+  // Skip schemas without ID in metadata – these are internal helper schemas
+  const meta = schema.meta()
+  if (!meta?.id) {
+    return
+  }
+
+  targetRegistry.add(schema, { id: meta.id })
+  schemas.set(meta.id, schema)
+}
+
+for (const version of VERSIONS) {
   // Enumerate and register schemas
   const schemasPaths = await glob(path.resolve(import.meta.dirname, `../schemas/${version}/**/*.ts`))
-  for await (const schemaPath of schemasPaths) {
-    const schemaModule = await import(schemaPath)
-
+  for (const schemaPath of schemasPaths) {
+    const schemaModule = await import(schemaPath) as Record<string, z.ZodType>
     for (const schema of Object.values(schemaModule)) {
-      // Skip everything but Zod schemas
-      if (!(schema instanceof z.ZodType)) continue
-
-      // Skip schemas without ID in metadata – these are internal helper schemas
-      const meta = schema.meta()
-      if (!meta?.id) {
-        continue
-      }
-
-      registry.add(schema, { id: meta.id })
-      schemas.set(meta.id, schema)
+      registerSchema(schema, registry, schemas)
     }
   }
 
   // Cleanup target directory
   const targetDirectory = path.resolve(TARGET_DIR, version)
-  const isDirectoryExists = await stat(targetDirectory).then(() => true).catch(() => false)
+
+  // eslint-disable-next-line unicorn/prefer-await -- that's more readable and elegant way.
+  const isDirectoryExists = await stat(targetDirectory)
+    .then(() => true)
+    .catch(() => false)
+
   if (isDirectoryExists) {
     await rm(targetDirectory, { force: true, recursive: true })
   }
+
   await mkdir(targetDirectory, { recursive: true })
 
   // Generate schemas
-  for await (const [id, schema] of schemas) {
+  for (const [id, schema] of schemas) {
     const jsonSchema = schema.toJSONSchema({
       // @ts-expect-error ts(2353) -- something is wrong with Zod's type inference.
       external: {
