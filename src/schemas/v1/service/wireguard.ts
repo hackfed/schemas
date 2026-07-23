@@ -2,7 +2,7 @@ import { z } from 'zod'
 
 import { Inet6NumberSchema } from '../base/inet6-number'
 
-export const WireguardServiceNodeSchema = z
+export const WireguardServicePeerSchema = z
   .object({
     address: Inet6NumberSchema.describe('IPv6 address inside the tunnel'),
     endpoint: z.string()
@@ -13,11 +13,11 @@ export const WireguardServiceNodeSchema = z
   })
   .strict()
 
-export const WireguardServiceSchema = z.array(WireguardServiceNodeSchema).meta({
+export const WireguardServiceSchema = z.array(WireguardServicePeerSchema).meta({
   description: 'Wireguard VPN network configuration for the organization',
   id: 'WireguardService',
   title: 'Organization Wireguard Service',
 })
 
 export type WireguardService = z.infer<typeof WireguardServiceSchema>
-export type WireguardServiceNode = z.infer<typeof WireguardServiceNodeSchema>
+export type WireguardServicePeer = z.infer<typeof WireguardServicePeerSchema>

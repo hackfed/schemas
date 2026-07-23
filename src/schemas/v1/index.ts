@@ -5,6 +5,7 @@ export * from './base/resource-definition'
 
 // Directories
 export * from './directory/telephony'
+export * from './directory/wireguard'
 
 // Entities
 export * from './entity/organization'
