@@ -4,8 +4,8 @@ import { OrganizationIdSchema } from '../base/organization-id'
 import { ResourceDefinitionSchema } from '../base/resource-definition'
 import { AboutServiceSchema } from '../service/about'
 import { AccessServiceSchema } from '../service/access'
-import { NebulaServiceSchema } from '../service/nebula'
 import { TelephonyServiceSchema } from '../service/telephony'
+import { WireguardServiceSchema } from '../service/wireguard'
 
 export const OrganizationSchema = ResourceDefinitionSchema
   .extend({
@@ -21,8 +21,8 @@ export const OrganizationSchema = ResourceDefinitionSchema
           .object({
             about: AboutServiceSchema.optional(),
             access: AccessServiceSchema.optional(),
-            nebula: NebulaServiceSchema.optional(),
             telephony: TelephonyServiceSchema.optional(),
+            wireguard: WireguardServiceSchema.optional(),
           })
           .describe('Services provided by the organization')
           .optional(),

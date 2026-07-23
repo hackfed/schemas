@@ -12,5 +12,5 @@ export * from './entity/organization'
 // Services
 export * from './service/about'
 export * from './service/access'
-export * from './service/nebula'
 export * from './service/telephony'
+export * from './service/wireguard'
