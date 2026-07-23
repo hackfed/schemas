@@ -21,7 +21,7 @@
   ],
   "scripts": {
     "generate": "tsx src/cmd/generate-json-schemas.ts",
-    "build": "rimraf dist && tsc",
+    "build": "rimraf dist && tsc -p tsconfig.build.json",
     "lint": "tsc --noEmit && eslint ."
   },
   "packageManager": "pnpm@10.28.0",

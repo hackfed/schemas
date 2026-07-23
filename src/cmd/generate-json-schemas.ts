@@ -38,9 +38,7 @@ for (const version of VERSIONS) {
   const targetDirectory = path.resolve(TARGET_DIR, version)
 
   // eslint-disable-next-line unicorn/prefer-await -- that's more readable and elegant way.
-  const isDirectoryExists = await stat(targetDirectory)
-    .then(() => true)
-    .catch(() => false)
+  const isDirectoryExists = await stat(targetDirectory).then(() => true).catch(() => false)
 
   if (isDirectoryExists) {
     await rm(targetDirectory, { force: true, recursive: true })
